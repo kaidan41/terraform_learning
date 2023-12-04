@@ -1,0 +1,14 @@
+arn:aws:s3:::my_corporate_bucket/Development/teste-01
+arn:aws:s3:::my_corporate_bucket/Development/teste-02
+arn:aws:s3:::my_corporate_bucket/Development/teste-03
+arn:aws:s3:::my_corporate_bucket/Development/teste-04
+arn:aws:s3:::my_corporate_bucket/Development/teste-05
+arn:aws:s3:::my_corporate_bucket/Development/teste-06
+arn:aws:s3:::my_corporate_bucket/Development/teste-07
+arn:aws:s3:::my_corporate_bucket/Development/teste-10
+arn:aws:s3:::my_corporate_bucket/Development/teste-11
+arn:aws:s3:::my_corporate_bucket/Development/teste-12
+arn:aws:s3:::my_corporate_bucket/Development/teste-13
+arn:aws:s3:::my_corporate_bucket/Development/teste-14
+arn:aws:s3:::my_corporate_bucket/Development/teste-15
+arn:aws:s3:::my_corporate_bucket/Development/teste-16
