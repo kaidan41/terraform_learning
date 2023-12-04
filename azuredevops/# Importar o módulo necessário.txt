@@ -1,4 +1,4 @@
-﻿# Importar o módulo necessário
+# Importar o módulo necessário
 Import-Module AzureRM
 
 # Autenticar no Azure
@@ -9,8 +9,8 @@ $headers = @{Authorization=("Basic {0}" -f $base64AuthInfo)}
 # Definir a organização, o projeto, o backlog item e o caminho da planilha
 $organization = "MLTECNO02"
 $project = "cloudengennier"
-$backlogItem = "85"
-$excelPath = "F:\Codificação\azuredevops\conta01.xlsx"
+$backlogItem = "3295"
+$excelPath = "F:\Codificação\azuredevops\conta03.xlsx"
 
 # Conectar ao Azure DevOps
 Connect-AzureRmAccount
@@ -28,15 +28,31 @@ echo "Serão criadas" $range.Rows.Count  "tasks"
 
 # Iterar sobre as linhas da segunda coluna
 for ($i = 1; $i -le $range.Rows.Count; $i++) {
-    $taskName = $range.Cells.Item($i, 2).Text
+    $taskName = $range.Cells.Item($i, 1).Text
 
-    $response = Invoke-RestMethod -Uri $url -Method Post -Body $body -ContentType "application/json-patch+json" -Headers $headers
-
-
-    # Excluir o item de trabalho
-    $workItemId = $response.id
-    $url = "https://dev.azure.com/$organization/$project/_apis/wit/workitems/$workItemId?api-version=6.0"
-    Invoke-RestMethod -Uri $url -Method Delete -Headers $headers
+    # Criar uma nova tarefa no Azure DevOps
+    $url = "https://dev.azure.com/$organization/$project/_apis/wit/workitems/`$Task?api-version=6.0"
+    $body = @"
+    [
+        {
+            "op": "add",
+            "path": "/fields/System.Title",
+            "value": "$taskName"
+        },
+        {
+            "op": "add",
+            "path": "/relations/-",
+            "value": {
+                "rel": "System.LinkTypes.Hierarchy-Reverse",
+                "url": "$backlogItemUrl",
+                 "attributes": {
+        "comment": "Criado a partir de um script PowerShell por Marcos Silva-Cloud"
+    }
+            }
+        }
+    ]
+"@
+    Invoke-RestMethod -Uri $url -Method Post -Body $body -ContentType "application/json-patch+json" -Headers $headers
 }
 
 # Fechar a planilha do Excel

@@ -2,7 +2,7 @@
 Import-Module AzureRM
 
 # Autenticar no Azure
-$patToken = "gd4ic4tssawj4rnrmtbgs4p56npg25rde3p2cshen4kabmctuaga"
+$patToken = ""
 $base64AuthInfo = [Convert]::ToBase64String([Text.Encoding]::ASCII.GetBytes((":$($patToken)")))
 $headers = @{Authorization=("Basic {0}" -f $base64AuthInfo)}
 
